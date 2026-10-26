@@ -1,0 +1,93 @@
+/* Laptop / chhoti screen */
+@media (max-width: 980px) {
+  .loan-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Tablet aur mobile: sidebar upar horizontal chips ban jati hai */
+@media (max-width: 760px) {
+  body {
+    flex-direction: column;
+  }
+  #ledgerName {
+    font-size: 1.7rem;
+  }
+  .side {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 14px;
+    gap: 10px;
+    overflow-x: auto;
+  }
+  .brand {
+    margin: 0;
+    white-space: nowrap;
+  }
+  .brand b,
+  .side-label {
+    display: none;
+  }
+  .ledgers {
+    flex-direction: row;
+    flex: none;
+    overflow: visible;
+  }
+  .ledgers button {
+    white-space: nowrap;
+    width: auto;
+  }
+  .side .btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  main {
+    padding: 18px 14px;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+  .hero {
+    padding: 22px 20px;
+  }
+  .budget {
+    flex-basis: 100%;
+  }
+}
+/* Chhote mobile */
+@media (max-width: 480px) {
+  .loan-form {
+    grid-template-columns: 1fr;
+  }
+  .loan-list .amt {
+    margin-left: 0;
+  }
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .stat:first-child {
+    grid-column: 1/-1;
+  }
+  .month-nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .month-nav input {
+    flex: 1;
+    text-align: center;
+  }
+  .card {
+    padding: 16px;
+  }
+  .btn {
+    flex: 1;
+  }
+  .list-head .btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ur-Latn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Expense Diary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="responsive.css" />
+  </head>
+  <body>
+    <aside class="side">
+      <div class="brand"><span class="logo">₨</span><b>Expense Diary</b></div>
+      <p class="side-label">My Workspace</p>
+      <ul id="ledgerList" class="ledgers"></ul>
+      <button id="addLedger" class="btn ghost">+ Add new workspace</button>
+    </aside>
+
+    <main>
+      <header class="top">
+        <div>
+          <h1 class="title">
+            <small class="crumb">my finances ›</small>
+            <span id="ledgerName">Hostel</span>
+          </h1>
+
+          <div class="mini-actions">
+            <button id="renameLedger" class="link">Edit workspace name</button>
+            <button id="deleteLedger" class="link danger">
+              Delete workspace
+            </button>
+          </div>
+        </div>
+        <div class="month-nav">
+          <button id="prevM" aria-label="Pichla mahina">‹</button>
+          <input type="month" id="monthPick" aria-label="Mahina chuno" />
+          <button id="nextM" aria-label="Agla mahina">›</button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="hero-sub" id="monthLabel">—</p>
+          <p class="hero-total" id="total">Rs 0</p>
+          <p class="hero-sub">This Month Total Expense</p>
+        </div>
+        <div class="budget">
+          <label for="budget">Monthly budget (Rs)</label>
+          <input type="number" id="budget" min="0" placeholder="0" />
+          <div class="bar"><i id="budgetBar"></i></div>
+          <p id="budgetNote" class="hero-sub">Set your budget</p>
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="stat"><span>Entries</span><b id="count">0</b></div>
+        <div class="stat"><span>Daily Average</span><b id="avg">Rs 0</b></div>
+        <div class="stat"><span>Highest Spend</span><b id="max">Rs 0</b></div>
+      </section>
+
+      <section class="grid">
+        <form id="expForm" class="card">
+          <h2 id="formTitle">Add Expense</h2>
+          <label>Date<input type="date" id="fDate" required /></label>
+          <label
+            >Expense name<input
+              type="text"
+              id="fTitle"
+              placeholder="e.g. Food, Books, Transport"
+              maxlength="60"
+              required
+          /></label>
+          <label
+            >Category
+            <select id="fCat">
+              <option>Food</option>
+              <option>Transport</option>
+              <option>Hostel</option>
+              <option>Education</option>
+              <option>Shopping</option>
+              <option>Family</option>
+              <option>Others</option>
+            </select>
+          </label>
+          <label
+            >Amount(PKR)<input
+              type="number"
+              id="fAmt"
+              min="1"
+              step="any"
+              placeholder="0"
+              required
+          /></label>
+          <div class="row">
+            <button class="btn" id="saveBtn" type="submit">Add Expense</button>
+            <button class="btn ghost" id="cancelBtn" type="button" hidden>
+              Cancel
+            </button>
+          </div>
+        </form>
+
+        <section class="card">
+          <h2>Spending categories</h2>
+          <div id="cats"></div>
+        </section>
+      </section>
+
+      <section class="card">
+        <div class="list-head">
+          <h2>This month entries</h2>
+          <button id="printBtn" class="btn ghost">
+            Monthly report print / PDF
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Items</th>
+                <th>Category</th>
+                <th class="num">Rupees</th>
+                <th class="noprint"></th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">Total Monthly Expense</td>
+                <td class="num" id="footTotal">Rs 0</td>
+                <td class="noprint"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <p id="empty" class="empty" hidden>
+          No expene in this month. Please add Expense first...
+        </p>
+      </section>
+      <section class="card loans">
+        <div class="list-head">
+          <h2>Loans Given</h2>
+          <b id="loanTotal" class="loan-total">Rs 0</b>
+        </div>
+        <form id="loanForm" class="loan-form">
+          <label
+            >Borrower's Name<input
+              type="text"
+              id="lName"
+              maxlength="40"
+              placeholder="e.g. Ali"
+              required
+          /></label>
+          <label
+            >Amount Lent (PKR)<input
+              type="number"
+              id="lAmt"
+              min="1"
+              step="any"
+              placeholder="0"
+              required
+          /></label>
+          <label>Date Lent<input type="date" id="lDate" required /></label>
+          <label
+            >Notes (Optional)<input
+              type="text"
+              id="lNote"
+              maxlength="60"
+              placeholder="e.g.What is the loan for?"
+          /></label>
+          <div class="row">
+            <button class="btn" id="lSave" type="submit">Add Loans</button>
+            <button class="btn ghost" id="lCancel" type="button" hidden>
+              Cancel
+            </button>
+          </div>
+        </form>
+        <ul id="loanList" class="loan-list"></ul>
+        <p id="loanEmpty" class="empty" hidden>No loans recorded yet</p>
+      </section>
+    </main>
+
+    <dialog id="ledgerDlg">
+      <form id="ledgerForm">
+        <h2 id="dlgTitle">Naya khaata</h2>
+        <input
+          type="text"
+          id="ledgerInput"
+          placeholder="e.g. Hostel, Ghar, Trip"
+          maxlength="30"
+          required
+        />
+        <div class="row">
+          <button class="btn" type="submit">Save</button>
+          <button class="btn ghost" type="button" id="dlgCancel">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+    <script src="script.js"></script>
+  </body>
+</html>
